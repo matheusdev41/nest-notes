@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
+import { UserModule } from './infra/http/modules/user/user.module';
 @Module({
-  imports: [],
+  imports: [UserModule],
   controllers: [],
   providers: [],
 })
