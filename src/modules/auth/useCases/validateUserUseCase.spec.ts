@@ -1,6 +1,6 @@
 import { User } from "src/modules/user/entities/user.entity";
 import { ValidateUseUserCase } from "./validateUserUseCase"
-import { UserRepositoryInMemory } from "src/modules/user/repository/UserRepositoryInMemory";
+import { UserRepositoryInMemory } from "src/modules/user/repositories/UserRepositoryInMemory";
 import { hash } from "bcryptjs"
 import { makeUser } from "src/modules/user/factories/userFactory";
 import { UnauthorizedException } from "@nestjs/common";

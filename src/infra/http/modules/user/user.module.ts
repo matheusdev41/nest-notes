@@ -1,11 +1,16 @@
 import { Module } from "@nestjs/common";
 import { UserController } from "./user.controller";
-import { CreateUserUseCase } from "src/modules/user/userCases/createUserUseCase/createUserUseCase";
+import { CreateUserUseCase } from "src/modules/user/useCases/createUserUseCase/createUserUseCase";
 import { DatabaseModule } from "src/infra/database/database.module";
+import { ValidateUseUserCase } from "src/modules/auth/useCases/validateUserUseCase";
 
 @Module({
     imports:[DatabaseModule],
     controllers: [UserController],
-    providers: [CreateUserUseCase]
+    providers: [
+      CreateUserUseCase,
+      ValidateUseUserCase,
+    ],
+    exports: [ValidateUseUserCase],
 })
 export class UserModule{}
