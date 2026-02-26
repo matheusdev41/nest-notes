@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
 
 export class CreateUserBody{
     @IsString({ message: 'O campo email precisa ser no formato texto.' })
@@ -12,5 +12,6 @@ export class CreateUserBody{
 
     @IsString({ message: 'O campo password precisar ser no formato texto' })
     @IsNotEmpty({ message: 'O campo password é obrigatório' })
+    @MinLength(6)
     password: string;
 }
