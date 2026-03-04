@@ -11,28 +11,28 @@ describe('Create User', () => {
     createUserUseCase = new CreateUserUseCase(userRepositoryInMemory);
   });
 
-  it("Should be able to create user", async () => {
+  it('Should be able to create user', async () => {
     expect(userRepositoryInMemory.users).toEqual([]);
 
     const user = await createUserUseCase.execute({
-      email: "email@email",
-      name: "Matheus",
-      password: "123123",
-    })
+      email: 'email@email',
+      name: 'Matheus',
+      password: '123123',
+    });
 
     expect(userRepositoryInMemory.users).toEqual([user]);
   });
-  it("Should be able to create user with password encrypted", async () => {
-    const userPasswordWithoutEncryption = "123123"
+  it('Should be able to create user with password encrypted', async () => {
+    const userPasswordWithoutEncryption = '123123';
 
     const user = await createUserUseCase.execute({
-      email: "email@email",
-      name: "Matheus",
-      password: "123123",
+      email: 'email@email',
+      name: 'Matheus',
+      password: '123123',
     });
 
     const userHasPasswordEncrypted = await compare(
-      userPasswordWithoutEncryption, 
+      userPasswordWithoutEncryption,
       user.password,
     );
 

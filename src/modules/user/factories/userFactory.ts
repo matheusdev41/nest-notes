@@ -1,15 +1,15 @@
-import { User } from "../entities/user.entity";
+import { User } from '../entities/user.entity';
 
 type Override = Partial<User>;
 
-export const makeUser = ({id, ...override}: Override) => {
+export const makeUser = ({ id, ...override }: Override) => {
   return new User(
     {
-      email: "email@gmail.com",
+      email: 'email@gmail.com',
       name: 'Matheus',
-      password: "123123",
+      password: '123123',
       ...override,
-    }, 
+    },
     id,
   );
 };

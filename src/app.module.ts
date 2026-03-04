@@ -10,7 +10,7 @@ import { JwtAuthGuard } from './infra/http/modules/auth/guards/jwtAuth.guard';
 @Module({
   imports: [
     AuthModule,
-    UserModule, 
+    UserModule,
     DatabaseModule,
     ConfigModule.forRoot({
       isGlobal: true,
@@ -18,7 +18,7 @@ import { JwtAuthGuard } from './infra/http/modules/auth/guards/jwtAuth.guard';
   ],
   controllers: [],
   providers: [
-    PrismaService,  
+    PrismaService,
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,

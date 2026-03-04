@@ -1,67 +1,66 @@
-import { ValidateUseUserCase } from "./validateUserUseCase";
-import { UserRepositoryInMemory } from "src/modules/user/repositories/UserRepositoryInMemory";
-import { hash } from "bcryptjs"
-import { makeUser } from "src/modules/user/factories/userFactory";
-import { UnauthorizedException } from "@nestjs/common";
+import { ValidateUseUserCase } from './validateUserUseCase';
+import { UserRepositoryInMemory } from 'src/modules/user/repositories/UserRepositoryInMemory';
+import { hash } from 'bcryptjs';
+import { makeUser } from 'src/modules/user/factories/userFactory';
+import { UnauthorizedException } from '@nestjs/common';
 
 let validadeUseUserCase: ValidateUseUserCase;
 let userRepositoryInMemory: UserRepositoryInMemory;
 
-describe("Validate User", () => {
+describe('Validate User', () => {
+  beforeEach(() => {
+    userRepositoryInMemory = new UserRepositoryInMemory();
+    validadeUseUserCase = new ValidateUseUserCase(userRepositoryInMemory);
+  });
 
-    beforeEach(() => {
-        userRepositoryInMemory = new UserRepositoryInMemory();
-        validadeUseUserCase = new ValidateUseUserCase(userRepositoryInMemory);
-    })
+  it('Should be able to return user when credentials are correct', async () => {
+    const userPasswordWithoutEncryption = '123123';
 
-    it("Should be able to return user when credentials are correct", async () => {
-        const userPasswordWithoutEncryption = '123123';
-
-        const user = makeUser({
-            password: await hash(userPasswordWithoutEncryption, 10),
-        });
-
-        userRepositoryInMemory.users = [user];
-
-        const result = await validadeUseUserCase.execute({
-            email: user.email,
-            password: userPasswordWithoutEncryption,
-        });
-
-        expect(result).toEqual(user)
+    const user = makeUser({
+      password: await hash(userPasswordWithoutEncryption, 10),
     });
 
-    it("Should be able to throw error when credentials incorrect", async () => {
-        const userPasswordWithoutEncryption = '123123';
+    userRepositoryInMemory.users = [user];
 
-        const user = makeUser({
-            password: await hash(userPasswordWithoutEncryption, 10),
-        });
+    const result = await validadeUseUserCase.execute({
+      email: user.email,
+      password: userPasswordWithoutEncryption,
+    });
 
-        userRepositoryInMemory.users = [user];
+    expect(result).toEqual(user);
+  });
 
-        expect(async () => {
-            await validadeUseUserCase.execute({
-                email: 'incorrect@gmail.com',
-                password: userPasswordWithoutEncryption,
-            });
-        }).rejects.toThrow(UnauthorizedException)
-    })
+  it('Should be able to throw error when credentials incorrect', async () => {
+    const userPasswordWithoutEncryption = '123123';
 
-    it("Should be able to throw error when credentials incorrect", async () => {
-        const userPasswordWithoutEncryption = '123123';
+    const user = makeUser({
+      password: await hash(userPasswordWithoutEncryption, 10),
+    });
 
-        const user = makeUser({
-            password: await hash(userPasswordWithoutEncryption, 10),
-        });
+    userRepositoryInMemory.users = [user];
 
-        userRepositoryInMemory.users = [user];
+    expect(async () => {
+      await validadeUseUserCase.execute({
+        email: 'incorrect@gmail.com',
+        password: userPasswordWithoutEncryption,
+      });
+    }).rejects.toThrow(UnauthorizedException);
+  });
 
-        expect(async () => {
-            await validadeUseUserCase.execute({
-                email: user.email,
-                password: "incorrect password",
-            });
-        }).rejects.toThrow(UnauthorizedException)
-    })
-})
+  it('Should be able to throw error when credentials incorrect', async () => {
+    const userPasswordWithoutEncryption = '123123';
+
+    const user = makeUser({
+      password: await hash(userPasswordWithoutEncryption, 10),
+    });
+
+    userRepositoryInMemory.users = [user];
+
+    expect(async () => {
+      await validadeUseUserCase.execute({
+        email: user.email,
+        password: 'incorrect password',
+      });
+    }).rejects.toThrow(UnauthorizedException);
+  });
+});
