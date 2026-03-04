@@ -12,7 +12,7 @@ export class ValidateUseUserCase {
 
     constructor(private UserRepository: UserRepository) {}
 
-    async execute({ email, password }) {
+    async execute({ email, password }: ValidadeUserRequest) {
         const user = await this.UserRepository.findByEmail(email)
 
         if(!user) 

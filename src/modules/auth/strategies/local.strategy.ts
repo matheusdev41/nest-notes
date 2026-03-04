@@ -8,7 +8,7 @@ import { ValidateUseUserCase } from "../useCases/validateUserUseCase/validateUse
 export class LocalStrategy extends PassportStrategy(Strategy) {
     constructor(private validateUserUseCase: ValidateUseUserCase) {
         super({
-            usernameField: 'email',
+          usernameField: 'email',
         });
     };
 

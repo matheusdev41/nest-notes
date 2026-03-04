@@ -16,7 +16,6 @@ export class UserController {
       name, 
       password
     });
-
     return UserViewModel.toHttp(user);
   }
 }

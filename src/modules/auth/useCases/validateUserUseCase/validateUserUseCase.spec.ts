@@ -1,4 +1,3 @@
-import { User } from "src/modules/user/entities/user.entity";
 import { ValidateUseUserCase } from "./validateUserUseCase";
 import { UserRepositoryInMemory } from "src/modules/user/repositories/UserRepositoryInMemory";
 import { hash } from "bcryptjs"
@@ -10,7 +9,7 @@ let userRepositoryInMemory: UserRepositoryInMemory;
 
 describe("Validate User", () => {
 
-    beforeAll(() => {
+    beforeEach(() => {
         userRepositoryInMemory = new UserRepositoryInMemory();
         validadeUseUserCase = new ValidateUseUserCase(userRepositoryInMemory);
     })
