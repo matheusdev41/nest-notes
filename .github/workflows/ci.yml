@@ -7,7 +7,7 @@ on:
       - developer
 
 jobs:
-  build:
+  quality:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,15 +18,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "npm"
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run Lint
-        run: npm run lint
+      - name: Generate Prisma Client
+        run: npx prisma generate
 
-      - name: Run Tests
-        run: npm run test
+      - name: Type check
+        run: npx tsc --noEmit
 
-      - name: Build Project
+      - name: Run ESLint
+        run: npm run lint -- --max-warnings=0
+
+      - name: Check formatting
+        run: npx prettier . --check
+
+      - name: Run tests
+        run: npm run test -- --coverage
+
+      # 🏗 Build
+      - name: Build project
         run: npm run build
