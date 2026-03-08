@@ -1,4 +1,4 @@
-import { Note } from '../../entities/node';
+import { Note } from '../../entities/note';
 import { NoteRepository } from '../../repositories/noteRepository';
 
 interface CreateNoteRequest {
