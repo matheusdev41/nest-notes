@@ -1,5 +1,5 @@
 import { NoteRepositoryInMemory } from 'src/modules/note/repositories/noteRepositoryInMemory';
-import { CreateNoteUseCase } from '../createNoteUseCase';
+import { CreateNoteUseCase } from '../createNoteUseCase/createNoteUseCase';
 
 let noteRepositoryInMemory: NoteRepositoryInMemory;
 let createNoteUseCase: CreateNoteUseCase;
