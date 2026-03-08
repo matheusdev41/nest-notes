@@ -34,7 +34,7 @@ export class Note {
   }
 
   set title(title: string) {
-    this.title = title;
+    this.props.title = title;
   }
 
   get description() {
@@ -42,7 +42,7 @@ export class Note {
   }
 
   set description(description: string) {
-    this.description = description;
+    this.props.description = description;
   }
 
   get userId() {
