@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/require-await */
 import { User } from '../entities/user.entity';
 import { UserRepository } from './UserRepository';
 

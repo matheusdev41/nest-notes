@@ -16,8 +16,14 @@
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
 
+    "fix": "npm run format && npm run lint:fix",
+
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "format:check": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
+
+    "prebuild": "npm run fix",
+
+    "postinstall": "prisma generate",
 
     "test": "jest",
     "test:watch": "jest --watch",

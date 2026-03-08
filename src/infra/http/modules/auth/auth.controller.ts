@@ -32,7 +32,7 @@ export class AuthController {
 
   @Get('test')
   @UseGuards(JwtAuthGuard)
-  async test(@Request() request: AuthenticatedRequestModel) {
+  test(@Request() request: AuthenticatedRequestModel) {
     return request.user;
   }
 }
