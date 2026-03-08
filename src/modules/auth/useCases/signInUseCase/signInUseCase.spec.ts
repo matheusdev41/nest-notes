@@ -1,7 +1,6 @@
 import { JwtService } from '@nestjs/jwt';
 import { SignInUseCase } from './signInUseCase';
 import { makeUser } from 'src/modules/user/factories/userFactory';
-import { UserPayload } from '../../models/UserPayload';
 
 let signInUseCase: SignInUseCase;
 let jwtService: JwtService;
@@ -19,7 +18,7 @@ describe('Sign in', () => {
       user,
     });
 
-    const payload = jwtService.decode(token) as UserPayload;
+    const payload = jwtService.decode(token);
 
     expect(payload.sub).toEqual(user.id);
   });
