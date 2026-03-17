@@ -3,7 +3,7 @@ import { NoteRepository } from '../../repositories/noteRepository';
 
 interface CreateNoteRequest {
   title: string;
-  description: string;
+  description?: string;
   userId: string;
 }
 
